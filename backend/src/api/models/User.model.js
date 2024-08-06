@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema(
   {
-    userName: {
+    userFullName: {
       type: String,
       required: true,
       unique: true,
@@ -30,10 +30,6 @@ const UserSchema = new Schema(
       enum: ["admin", "user"],
       default: "user",
     },
-    age: {
-    type: Number,
-    required:true,
-    },
     password: {
       type: String,
       required: true,
@@ -51,6 +47,12 @@ const UserSchema = new Schema(
       type: Boolean,
       default: false,
     },
+
+    profile: {
+        type: Schema.Types.ObjectId,
+        ref: "Profile",
+        required: true,
+      },
 
   },
   { timestamps: true } //Refleja el momento exacto de la modificación
