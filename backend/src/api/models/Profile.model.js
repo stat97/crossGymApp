@@ -17,7 +17,14 @@ const ProfileSchema = new Schema(
         type: String,
         required:true,
     },
-
+    height: {
+        type:Number,
+        required:true,
+    },
+    previousInjuries: {
+        type: String,
+        trim: true,
+    },
 },
 { timestamps: true } //Refleja el momento exacto de la modificación
 );
