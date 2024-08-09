@@ -3,7 +3,7 @@ dotenv.config();
 const nodemailer = require("nodemailer");
 const { setTestEmailSend } = require("../state/state.data");
 
-const sendEmail = (userEmail, name, confirmationCode) => {
+const sendEmail = (userEmail,confirmationCode) => {
   setTestEmailSend(false);
   const email = process.env.EMAIL;
   const password = process.env.PASSWORD;
@@ -20,11 +20,11 @@ const sendEmail = (userEmail, name, confirmationCode) => {
     from: email,
     to: userEmail,
     subject: "Asunto: Código de Confirmación - ¡Bienvenido a CrossGymApp!",
-    html: `Estimado/a ${name},
+    html: `Estimado/a 
 
     ¡Gracias por confiar en CrossGymApp! Nos alegra mucho tenerte como parte de nuestra comunidad fitness.
 
-    Tu código de confirmación es: ${confirmationCode}
+    Tu código de confirmación es: ${userDB.confirmationCode}
 
     Por favor, ingrésalo en la plataforma para completar tu registro. Si tienes alguna pregunta o necesitas asistencia, no dudes en contactarnos. Estamos aquí para ayudarte a alcanzar tus metas.
 

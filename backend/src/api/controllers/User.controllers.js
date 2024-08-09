@@ -86,9 +86,38 @@ const sendCode = async (req, res, next) => {
     const mailOptions = {
       from: emailEnv,
       to: userDB.email,
-      subject: "Confirmation code",
-      text: `Tu código es ${userDB.confirmationCode}. Muchas gracias por formar parte de nuestra plataforma. ${userDB.userName}`,
+      subject: "Código de Confirmación para CrossGymApp",
+      html: `
+        <div style="font-family: Arial, sans-serif; color: #333; margin: 0; padding: 0;">
+          <div style="text-align: center; padding: 20px; background-color: #f7f7f7;">
+            <h2 style="color: #333;">¡Bienvenido a CrossGymApp!</h2>
+          </div>
+          <div style="padding: 20px;">
+            <p style="font-size: 16px; line-height: 1.5;">
+              ¡Gracias por confiar en <strong>CrossGymApp</strong>! Nos alegra mucho tenerte como parte de nuestra comunidad fitness.
+            </p>
+            <p style="font-size: 16px; line-height: 1.5;">
+              Tu código de confirmación es:
+            </p>
+            <div style="background-color: #f0f0f0; border: 1px solid #ddd; padding: 15px; text-align: center; font-size: 18px; font-weight: bold; margin: 20px 0;">
+              ${userDB.confirmationCode}
+            </div>
+            <p style="font-size: 16px; line-height: 1.5;">
+              Por favor, ingrésalo en la plataforma para completar tu registro. Si tienes alguna pregunta o necesitas asistencia, no dudes en contactarnos. Estamos aquí para ayudarte a alcanzar tus metas.
+            </p>
+            <p style="font-size: 16px; line-height: 1.5;">
+              ¡Bienvenido/a a CrossGymApp!
+            </p>
+            <p style="font-size: 16px; line-height: 1.5;">
+              Saludos cordiales,<br>
+              El equipo de CrossGymApp<br>
+              Gracias por confiar en nosotros
+            </p>
+          </div>
+        </div>
+      `,
     };
+    
 
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
@@ -131,8 +160,38 @@ const resendCode = async (req, res, next) => {
       const mailOptions = {
         from: email,
         to: req.body.email,
-        subject: "Confirmation code",
-        text: `tu codigo es ${userExists.confirmationCode}`,
+        subject: "Solicitud de Nuevo Código de Confirmación para CrossGymApp",
+        html: `
+      <div style="font-family: Arial, sans-serif; color: #333; margin: 0; padding: 0;">
+        <div style="text-align: center; padding: 20px; background-color: #f7f7f7;">
+          <h2 style="color: #333;">Solicitud de Nuevo Código de Confirmación para CrossGymApp</h2>
+        </div>
+        <div style="padding: 20px;">
+          <p style="font-size: 16px; line-height: 1.5;">
+            Lamentamos saber que no has recibido el código de confirmación para completar tu registro en <strong>CrossGymApp</strong>. Entendemos lo importante que es para ti completar este proceso y estamos aquí para ayudarte.
+          </p>
+          <p style="font-size: 16px; line-height: 1.5;">
+            Para solucionar el problema, hemos generado un nuevo código de confirmación que puedes usar para completar tu registro. Por favor, utiliza el siguiente código:
+          </p>
+          <div style="background-color: #f0f0f0; border: 1px solid #ddd; padding: 15px; text-align: center; font-size: 18px; font-weight: bold; margin: 20px 0;">
+            ${userExists.confirmationCode}
+          </div>
+          <p style="font-size: 16px; line-height: 1.5;">
+            Si aún no has recibido el primer código, te recomendamos que revises tu carpeta de spam o correo no deseado, ya que a veces los mensajes pueden ser filtrados allí.
+          </p>
+          <p style="font-size: 16px; line-height: 1.5;">
+            Si sigues teniendo problemas o necesitas asistencia adicional, no dudes en responder a este correo o ponerte en contacto con nuestro equipo de soporte. Estamos aquí para ayudarte y asegurarnos de que tu experiencia con CrossGymApp sea lo más fluida posible.
+          </p>
+          <p style="font-size: 16px; line-height: 1.5;">
+            Gracias por tu paciencia y por confiar en CrossGymApp.
+          </p>
+          <p style="font-size: 16px; line-height: 1.5;">
+            Saludos cordiales,<br>
+            El equipo de CrossGymApp
+          </p>
+        </div>
+      </div>
+    `,
       };
 
       transporter.sendMail(mailOptions, (error, info) => {
@@ -285,11 +344,40 @@ const sendPassword = async (req, res, next) => {
     let passwordSecure = randomPassword();
     console.log(passwordSecure);
     const mailOptions = {
-      from: email,
-      to: userDb.email,
-      subject: "-----",
-      text: `User: ${userDb.userName}. Your new code login is ${passwordSecure} Hemos enviado esto porque tenemos una solicitud de cambio de contraseña, si no has sido ponte en contacto con nosotros, gracias.`,
-    };
+        from: email,
+        to: userDb.email,
+        subject: "Código de Nuevo Inicio de Sesión para CrossGymApp",
+        html: `
+          <div style="font-family: Arial, sans-serif; color: #333; margin: 0; padding: 0;">
+            <div style="text-align: center; padding: 20px; background-color: #f7f7f7;">
+              <h2 style="color: #333;">Solicitud de Cambio de Contraseña</h2>
+            </div>
+            <div style="padding: 20px;">
+              <p style="font-size: 16px; line-height: 1.5;">
+                Estimado/a ${userDb.userName},
+              </p>
+              <p style="font-size: 16px; line-height: 1.5;">
+                Hemos recibido una solicitud para cambiar la contraseña de tu cuenta en <strong>CrossGymApp</strong>. A continuación, encontrarás tu nuevo código de inicio de sesión:
+              </p>
+              <div style="background-color: #f0f0f0; border: 1px solid #ddd; padding: 15px; text-align: center; font-size: 18px; font-weight: bold; margin: 20px 0;">
+                ${passwordSecure}
+              </div>
+              <p style="font-size: 16px; line-height: 1.5;">
+                Si no realizaste esta solicitud o si tienes alguna pregunta, por favor, ponte en contacto con nuestro equipo de soporte. Estamos aquí para ayudarte.
+              </p>
+              <p style="font-size: 16px; line-height: 1.5;">
+                Gracias por tu atención y por confiar en CrossGymApp.
+              </p>
+              <p style="font-size: 16px; line-height: 1.5;">
+                Saludos cordiales,<br>
+                El equipo de CrossGymApp
+              </p>
+            </div>
+          </div>
+        `,
+      };
+      
+      
     transporter.sendMail(mailOptions, async function (error, info) {
       if (error) {
         /// SI HAY UN ERROR MANDO UN 404
