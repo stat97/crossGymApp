@@ -20,8 +20,19 @@ const sendEmail = (userEmail, name, confirmationCode) => {
   const mailOptions = {
     from: email,
     to: userEmail,
-    subject: "Confirmation code",
-    text: `tu codigo es ${confirmationCode}, gracias por confiar en nosotros ${name}`,
+    subject: "Asunto: Código de Confirmación - ¡Bienvenido a CrossGymApp!",
+    text: `Estimado/a ${name},
+
+    ¡Gracias por confiar en CrossGymApp! Nos alegra mucho tenerte como parte de nuestra comunidad fitness.
+
+    Tu código de confirmación es: ${confirmationCode}
+
+    Por favor, ingrésalo en la plataforma para completar tu registro. Si tienes alguna pregunta o necesitas asistencia, no dudes en contactarnos. Estamos aquí para ayudarte a alcanzar tus metas.
+
+    ¡Bienvenido/a a CrossGymApp!
+
+    Saludos cordiales, , gracias por confiar en nosotros 
+    Equipo de CrossGymApp`,
   };
 
   transporter.sendMail(mailOptions, function (error, info) {

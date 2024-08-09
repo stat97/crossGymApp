@@ -51,7 +51,7 @@ const UserSchema = new Schema(
     profile: {
         type: Schema.Types.ObjectId,
         ref: "Profile",
-        required: true,
+        
       },
 
   },
