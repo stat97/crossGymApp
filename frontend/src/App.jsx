@@ -1,5 +1,4 @@
 import './App.css';
-import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Footer, Header, ScrollToTopButton } from './components';
 

@@ -1,6 +1,4 @@
 import { NavLink } from 'react-router-dom';
-import { SeeCompanies } from '../../components/SeeCompanies/SeeCompanies';
-import { ImageHome } from '../../components/ImageHome/ImageHome';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/authContext';
 
@@ -25,7 +23,6 @@ export const Home = () => {
       </section>
 
       <section className="big-title-section">
-        <p>XSOLARX</p>
         <h2>
           crossGymApp es una app de monitoreo físico
         </h2>
