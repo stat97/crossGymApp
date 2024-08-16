@@ -8,91 +8,40 @@ const EvaluationSchema = new Schema(
       ref: "User",
       required: true,
     },
-    objectives: {
-      type: [Number], // Array para almacenar los objetivos, e.g., [2, 3]
+    //*escala visual analógica para el dolor
+    eva: {
+      type: Number,
+      min: 0,
+      max: 10,
       required: true,
     },
-    overheadSquatVideo: {
-      type: String, // URL del video
+    //*escala de percepción de esfuerzo durante el entrenamiento
+    rpe: {
+      type: Number,
+      min: 0,
+      max: 10,
+      required: true,
     },
-    kneeToWall: {
-      type: Number, // Medida en cm
-      validate: {
-        validator: function (v) {
-          return v >= 0;
-        },
-        message: "Knee to Wall debe ser mayor o igual a 0",
-      },
+    //*Calidad de sueño
+    cs: {
+      type: Number,
+      min: 0,
+      max: 10,
+      required: true,
     },
-    singleLegSquat: {
-      score: {
-        type: Number,
-        min: 1,
-        max: 5,
-        required: true,
-      },
-      trunkInclination: Boolean,
-      pelvicInclination: Boolean,
-      hipAdduction: Boolean,
-      kneeValgus: Boolean,
-      balanceLoss: Boolean,
+    //*Nivel de estrés
+    stress: {
+      type: Number,
+      min: 0,
+      max: 10,
+      required: true,
     },
-    hip: {
-      rom: {
-        type: Number,
-      },
-      abductionStrength: {
-        type: Number,
-      },
-      adductionStrength: {
-        type: Number,
-      },
-    },
-    dorsal: {
-      seatedRom: {
-        type: Number,
-      },
-    },
-    shoulder: {
-      romInternal: {
-        type: Number,
-      },
-      romExternal: {
-        type: Number,
-      },
-      strengthInternal: {
-        type: Number,
-      },
-      strengthExternal: {
-        type: Number,
-      },
-    },
-    pain: {
-      eva: {
-        type: Number,
-        min: 0,
-        max: 10,
-      },
-      rpe: {
-        type: Number,
-        min: 0,
-        max: 10,
-      },
-      cs: {
-        type: Number,
-        min: 0,
-        max: 10,
-      },
-      stress: {
-        type: Number,
-        min: 0,
-        max: 10,
-      },
-      stiffness: {
-        type: Number,
-        min: 0,
-        max: 10,
-      },
+    //*Nivel de rigidez
+    stiffness: {
+      type: Number,
+      min: 0,
+      max: 10,
+      required: true,
     },
   },
   { timestamps: true }
