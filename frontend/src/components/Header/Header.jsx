@@ -1,87 +1,50 @@
-// Header.js
-
 import './Header.css';
-import { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/authContext';
-import { DarkModeToggle } from '../DarkModeToggle/DarkModeToggle';
 
 export const Header = () => {
   const { user, logout } = useAuth();
-  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
-  const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  useEffect(() => {
-    setIsMobileNavOpen(false);
-  }, [location.pathname]);
-
-  const handleClickMenu = () => {
-    setIsMobileNavOpen(!isMobileNavOpen);
-  };
-
-  const handleNavLinkClick = () => {
-    setIsMobileNavOpen(false);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <>
-      <header>
-        <div className="auxfa">
-          <i className="fa fa-bars" onClick={handleClickMenu}></i>
-          <div className="logo-mobile1"></div>
-        </div>
-        <nav
-          className={`nav ${isMobileNavOpen ? 'nav-mobile' : 'nav-large'} ${user ? 'user-logged-in' : 'user-logged-out'}`}
-        >
-          {!isMobileNavOpen && (
-            <NavLink className="link-home" to="/" onClick={handleNavLinkClick}>
-              <div className="logo"></div>
-            </NavLink>
-          )}
-          {isMobileNavOpen ? (
-            <NavLink className="link-home-mobile" to="/" onClick={handleNavLinkClick}>
-              <p>Home</p>
-            </NavLink>
-          ) : (
-            <NavLink className="link-home" to="/" onClick={handleNavLinkClick}>
-              <p>Home</p>
-            </NavLink>
-          )}
-          <NavLink className="stats" to="/estadisticas" onClick={handleNavLinkClick}>
-            <p>Estadisticas</p>
+    <header className="header">
+      <div className="menu-icon" onClick={toggleMenu}>
+        <i className="fa fa-bars"></i>
+      </div>
+
+      <div className="logo-container">
+        <NavLink className="logo-link" to="/">
+          <h1 className="logo-text">CrossGymApp</h1>
+        </NavLink>
+      </div>
+
+      <nav className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+        <NavLink className="nav-link" to="/" onClick={toggleMenu}>
+          Home
+        </NavLink>
+        {!user && (
+          <NavLink className="nav-link" to="/login">
+            <button className="login-button">Login</button>
           </NavLink>
-          <NavLink to="/charts" onClick={handleNavLinkClick}>
-            <p>Graficas de entreno</p>
+        )}
+        {user && (
+          <NavLink
+            className="nav-link"
+            to="/"
+            onClick={() => {
+              toggleMenu();
+              logout();
+            }}
+          >
+            Logout
           </NavLink>
-          {user == null && (
-            <NavLink to="/login" onClick={handleNavLinkClick}>
-              <button className="button--green">Login</button>
-            </NavLink>
-          )}
-          {user !== null ? (
-            <NavLink to="/stats2" onClick={handleNavLinkClick}>
-              <p>Sobre nosotros</p>
-            </NavLink>
-          ) : null}
-          {user !== null && (
-            <NavLink
-              to="/"
-              onClick={() => {
-                setIsMobileNavOpen(false);
-                logout();
-              }}
-            >
-              <button className="button--blue button-medium">Logout</button>
-            </NavLink>
-          )}
-          {user !== null ? (
-            <NavLink to="/dashboard" onClick={handleNavLinkClick}>
-              <img className="icon" src={user?.image} alt={user?.user} />
-            </NavLink>
-          ) : null}
-          <DarkModeToggle />
-        </nav>
-      </header>
-    </>
+        )}
+      </nav>
+    </header>
   );
 };

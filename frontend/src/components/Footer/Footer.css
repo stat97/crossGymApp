@@ -1,0 +1,21 @@
+footer {
+    width: 100vw; /* Ocupa todo el ancho del viewport */
+    background: transparent; /* Fondo transparente para mostrar el fondo del body */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .footer-container {
+    text-align: center;
+    width: 100%;
+    background: transparent; /* Asegura que el contenedor del footer también sea transparente */
+    color: #fff; /* Color del texto */
+  }
+  
+  .rights {
+    margin: 0;
+    font-size: 14px;
+  }

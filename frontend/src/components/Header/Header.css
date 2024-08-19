@@ -1,0 +1,88 @@
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    width: 100vw;
+  height: auto;
+    background-color: #333;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  .menu-icon {
+    cursor: pointer;
+    font-size: 24px;
+    color: #fff;
+  }
+  
+  .logo-container {
+    text-align: center;
+    flex-grow: 1;
+  }
+  
+  .logo-text {
+    font-size: 24px;
+    color: #fff;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  
+  .nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  .login-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 10vh; /* Justo debajo del header */
+    left: 0;
+    background-color: #333;
+    width: 100%;
+    padding: 10px 0;
+  }
+  
+  .nav-links .nav-link {
+    padding: 10px 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+  
+    .nav-links.active {
+      display: flex;
+    }
+  
+    .header {
+      justify-content: space-between;
+    }
+  }
+  

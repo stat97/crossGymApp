@@ -49,38 +49,29 @@ export const Login = () => {
 
         <form onSubmit={handleSubmit(formSubmit)}>
           <div className="email_container info_container">
-            <label htmlFor="custom-input" className="custom-placeholder">
-              email
-            </label>
             <input
               className="input_user"
               type="email"
               id="email"
+              placeholder="Email"
               name="email"
               autoComplete="false"
               {...register('email', { required: true })}
             />
           </div>
           <div className="password_container info_container">
-            <label htmlFor="custom-input" className="custom-placeholder">
-              password
-            </label>
             <input
               className="input_user"
               type="password"
               id="password"
+              placeholder="Password"
               name="password"
               autoComplete="false"
               {...register('password', { required: true })}
             />
           </div>
           <div className="btn_container">
-            <button
-              className="btn"
-              type="submit"
-              disabled={send}
-              style={{ background: send ? '#4b4848' : '#000000' }}
-            >
+            <button>
               Login
             </button>
           </div>

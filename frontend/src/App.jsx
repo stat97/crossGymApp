@@ -1,6 +1,6 @@
 import './App.css';
 import { Outlet } from 'react-router-dom';
-import { Footer, Header, ScrollToTopButton } from './components';
+import { Footer, Header } from './components';
 
 
 const App = () => {
@@ -9,7 +9,6 @@ const App = () => {
       <Header />
       <main>
         <Outlet />
-        <ScrollToTopButton />
       </main>
       <Footer />
     </>

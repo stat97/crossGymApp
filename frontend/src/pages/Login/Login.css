@@ -1,0 +1,43 @@
+#login-container {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+  /* Login.css */
+
+.input_user {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Añadir un border-radius */
+  }
+  
+  .input_user:focus {
+    border-color: #7A3FA4; /* Color del borde cuando el input está enfocado */
+    outline: none;
+  }
+  
+  .btn_container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #7A3FA4;
+    color: white;
+    border: none;
+    border-radius: 8px; /* Añadir un border-radius al botón también */
+    cursor: pointer;
+  }
+  
+  .btn_container button:hover {
+    background-color: #9C308E;
+  }
+  
+  .info_container {
+    margin-bottom: 15px;
+  }
+  
