@@ -59,6 +59,17 @@ export const useLoginError = (res, setRes, userLogin, setLoginOk) => {
     });
   }
 
+  if (res?.response?.data?.includes("User not verified")) {
+    setRes(() => ({}));
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'User not verified ❎',
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+
   //! ----------------- 500
   if (res?.response?.status == 500) {
     setRes(() => ({}));
