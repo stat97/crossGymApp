@@ -8,7 +8,7 @@ import { Home } from '../pages/Home/Home';
 // import { CheckCode } from '../pages/Login/CheckCode';
 // import { ForgotPassword } from '../pages/Login/ForgotPassword';
 // import { FormProfile } from '../pages/Login/FormProfile';
-// import { Register } from '../pages/Register/Register';
+import { Register } from '../pages/Register/Register';
 // import { ProfilePage } from '../pages/Profiles/ProfilePage';
 import { Login } from '../pages/Login/Login';
 
@@ -21,10 +21,10 @@ export const router = createBrowserRouter([
         path: '/',
         element: <Home />,
       },
-    //   {
-    //     path: '/register',
-    //     element: <Register />,
-    //   },
+       {
+        path: '/register',
+         element: <Register />,
+       },
       {
         path: '/login',
         element: <Login />,
