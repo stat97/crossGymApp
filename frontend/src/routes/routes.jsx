@@ -11,6 +11,7 @@ import { Register } from '../pages/Register/Register';
 // import { ProfilePage } from '../pages/Profiles/ProfilePage';
 import { Login } from '../pages/Login/Login';
 import { ChangePassword } from '../pages/ChangePassword/ChangePassword';
+import { ForgotPassword } from '../pages/ForgotPassword/ForgotPassword';
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,11 @@ export const router = createBrowserRouter([
             <ChangePassword />
           </Protected>
         ),
+      },
+      // olvidaste la contraseña ?
+      {
+        path: '/forgotPassword',
+        element: <ForgotPassword />,
       },
     //   {
     //     path: '/profiles',
