@@ -75,7 +75,7 @@ export const Register = () => {
           <form onSubmit={handleSubmit(formSubmit)}>
             <label htmlFor="input_user">
               <input
-                className="input_user1"
+                className="input_user"
                 type="text"
                 id="userName"
                 name="userName"
@@ -87,7 +87,7 @@ export const Register = () => {
 
             <label htmlFor="input_password">
               <input
-                className="input_Password1"
+                className="input_user"
                 type="password"
                 id="password"
                 name="password"
@@ -99,7 +99,7 @@ export const Register = () => {
 
             <label htmlFor="input_email">
               <input
-                className="input_email1"
+                className="input_user"
                 type="email"
                 id="email"
                 name="email"
@@ -110,7 +110,7 @@ export const Register = () => {
             </label>
             <div className="gender">
               <label htmlFor="hombre" className="label-radio hombre">
-                Male
+                Hombre
               </label>
               <input
                 type="radio"
@@ -120,7 +120,7 @@ export const Register = () => {
                 {...register('gender')}
               />
               <label htmlFor="mujer" className="label-radio mujer">
-                Female
+                Mujer
               </label>
               <input
                 type="radio"
@@ -134,20 +134,20 @@ export const Register = () => {
             <Uploadfile />
             <div className="btn_container">
               <button className="button--blue" type="submit" disabled={send}>
-                Register
+                Registro
               </button>
             </div>
           </form>
           <div className="footerForm">
             <p className="bottom-text p-xs">
-              By clicking the Sign Up button, you agree to our{' '}
-              <Link className="linkr1">Terms & Conditions</Link> and{' '}
-              <Link className="linkr1">Privacy Policy</Link>.
+            Al hacer clic en el botón Registrarse, aceptas nuestros{' '}
+              <Link className="linkr1">Términos y Condiciones</Link> y{' '}
+              <Link className="linkr1">Política de Privacidad</Link>.
             </p>
             <p className=" p-xs">
-              Already have an account?{' '}
+              ¿Ya tienes una cuenta?{' '}
               <Link className="linkr1" to="/login">
-                <br /> Login here
+                <br /> Logeate aquí
               </Link>
             </p>
           </div>

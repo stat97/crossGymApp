@@ -82,7 +82,7 @@ export const Uploadfile = () => {
             Please select an image
           </div>
           <span id="file-upload-btn" className="btn btn-primary">
-            Select a file
+            Sube tu foto de perfil
           </span>
         </div>
         <div id="response" className="hidden">

@@ -25,13 +25,9 @@ a:hover {
 body {
   margin: 0;
   padding:0;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Para centrar el contenido horizontalmente */
   background: linear-gradient(135deg, #3B4485, #7A3FA4, #CE41B8);
-  overflow-x: hidden; 
-  overflow: hidden;
-  height:100%;
+  
+  
 }
 
 

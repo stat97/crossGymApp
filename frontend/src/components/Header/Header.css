@@ -3,11 +3,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
-    width: 100vw;
-  height: auto;
+    width: 100%;
     background-color: #333;
-    color: #fff;
     position: fixed;
     top: 0;
     left: 0;
