@@ -28,7 +28,7 @@ const registerWithRedirect = async (req, res, next) => {
     let confirmationCode = randomCode();
     const userExist = await User.findOne(
       { email: req.body.email },
-      { userName: req.body.userFullName }
+      { userFullName: req.body.userFullName }
     );
     if (!userExist) {
       const newUser = new User({ ...req.body, confirmationCode });
@@ -61,7 +61,6 @@ const registerWithRedirect = async (req, res, next) => {
     return next(error);
   }
 };
-
 //-------------------CONTROLADORES QUE PUEDEN SER REDIRECT-------------------------------------------
 
 /* Se llaman por sí mismos por parte del cliente o vía redirect, como controladores de funciones accesorias */
@@ -282,7 +281,12 @@ const login = async (req, res, next) => {
     const userDB = await User.findOne({ email });
 
     if (userDB) {
-      // compara dos contraseñar una sin encryptar y otra que si lo esta
+      // Verifica si el usuario ha sido verificado
+      if (userDB.check === false) {
+        return res.status(404).json("User not verified");
+      }
+
+      // Compara dos contraseñas: una sin encriptar y otra que sí lo está
       if (bcrypt.compareSync(password, userDB.password)) {
         const token = generateToken(userDB._id, email);
         return res.status(200).json({
@@ -290,10 +294,10 @@ const login = async (req, res, next) => {
           token,
         });
       } else {
-        return res.status(404).json("password dont match");
+        return res.status(404).json("Password don't match");
       }
     } else {
-      return res.status(404).json("User no register");
+      return res.status(404).json("User not registered");
     }
   } catch (error) {
     return next(error);
