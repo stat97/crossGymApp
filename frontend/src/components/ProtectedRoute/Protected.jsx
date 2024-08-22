@@ -7,7 +7,7 @@ export const Protected = ({ children }) => {
   if (deleteUser) {
     return <Navigate to="/register" />;
   }
-  if (user == null || user?.check == false) {
+  if (user === null || user?.check === false) {
     return <Navigate to="/login" />;
   }
 

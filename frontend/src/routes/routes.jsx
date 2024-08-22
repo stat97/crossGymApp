@@ -10,8 +10,11 @@ import { Home } from '../pages/Home/Home';
 import { Register } from '../pages/Register/Register';
 // import { ProfilePage } from '../pages/Profiles/ProfilePage';
 import { Login } from '../pages/Login/Login';
-import { ChangePassword } from '../pages/ChangePassword/ChangePassword';
-import { ForgotPassword } from '../pages/ForgotPassword/ForgotPassword';
+import { ChangePassword } from '../pages/Password/ChangePassword/ChangePassword';
+import { ForgotPassword } from '../pages/Password/ForgotPassword/ForgotPassword';
+import { CheckCode } from '../pages/CheckCode/CheckCode';
+import { ProtectedCheckChildren } from '../components';
+import { Dashboard } from '../pages/Dashboard/Dashboard';
 
 export const router = createBrowserRouter([
   {
@@ -26,8 +29,17 @@ export const router = createBrowserRouter([
         path: '/register',
          element: <Register />,
        },
+       {
+        path: '/verifyCode',
+        element: (
+         <ProtectedCheckChildren>
+            <CheckCode />
+         </ProtectedCheckChildren>
+        ),
+    },
       {
         path: '/login',
+        
         element: <Login />,
       },
       // cambiar contraseña dentro del perfil
@@ -39,27 +51,29 @@ export const router = createBrowserRouter([
           </Protected>
         ),
       },
+      {
+        path: '/dashboard',
+        element: (
+          <Protected>
+            <Dashboard />
+          </Protected>
+        ),
+      },
       // olvidaste la contraseña ?
       {
         path: '/forgotPassword',
         element: <ForgotPassword />,
       },
+      {
+        path: '/forgotPassword',
+         element: <ForgotPassword />,
+       },
     //   {
     //     path: '/profiles',
     //     element: <ProfilePage />,
     //   },
-     // {
-       // path: '/forgotPassword',
-       // element: <ForgotPassword />,
-      //},
-    //   {
-    //     path: '/verifyCode',
-    //     element: (
-    //       <ProtectedCheckChildren>
-    //         <CheckCode />
-    //       </ProtectedCheckChildren>
-    //     ),
-    //   },
+     
+     
     //   {
     //     path: '/profile',
     //     element: (

@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 
-import { autoLogin } from '../services/user.service';
+import { autoLogin } from '../../services/user.service';
 
 export const useAutoLogin = async (allUser, userLogin) => {
   try {

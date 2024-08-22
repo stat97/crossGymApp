@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Link, Navigate } from 'react-router-dom';
 
 import { useAuth } from '../../context/authContext';
-import { useLoginError } from '../../hooks/useLoginError';
+import { useLoginError } from '../../hooks/useLogin/useLoginError';
 import { loginUserService } from '../../services/user.service';
 
 export const Login = () => {

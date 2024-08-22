@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2/dist/sweetalert2.all.js';
 
-import { useAuth } from '../../context/authContext';
-import { useChangePasswordError } from '../../hooks';
-import { modifyPassword } from '../../services/user.service';
+import { useAuth } from '../../../context/authContext';
+import { useChangePasswordError } from '../../../hooks';
+import { modifyPassword } from '../../../services/user.service';
 
 export const ChangePassword = () => {
   const { setUser } = useAuth();

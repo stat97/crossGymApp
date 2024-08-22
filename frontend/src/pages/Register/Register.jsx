@@ -7,7 +7,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 import { Uploadfile } from '../../components/UploadFile/Uploadfile';
 import { useAuth } from '../../context/authContext';
-import { useRegisterError } from '../../hooks/useRegisterError';
+import { useRegisterError } from '../../hooks/useRegister/useRegisterError';
 import { registerWithRedirect } from '../../services/user.service';
 
 export const Register = () => {
@@ -78,9 +78,9 @@ export const Register = () => {
                 className="input_user"
                 type="text"
                 id="userName"
-                name="userName"
+                name="userFullName"
                 autoComplete="false"
-                {...register('userName', { required: true })}
+                {...register('userFullName', { required: true })}
                 placeholder="Nombre"
               />
             </label>

@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
 
-import { useForgotPasswordError } from '../../hooks';
-import { changePassword } from '../../services/user.service';
+import { useForgotPasswordError } from '../../../hooks';
+import { changePassword } from '../../../services/user.service';
 
 export const ForgotPassword = () => {
   const { handleSubmit, register } = useForm();
