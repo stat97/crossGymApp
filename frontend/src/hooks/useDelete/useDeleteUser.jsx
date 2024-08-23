@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2/dist/sweetalert2.all.js';
-import { deleteUser } from '../services/user.service';
+import { deleteUser } from '../../services/user.service';
 
 export const useDeleteUser = (user, setUser, setDeleteUser) => {
   Swal.fire({
