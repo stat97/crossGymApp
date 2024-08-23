@@ -712,6 +712,42 @@ const getByName = async (req, res, next) => {
     );
   }
 };
+const deleteUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const userExists = await User.findById(id);
+
+    if (!userExists) {
+      return res.status(404).json({
+        error: "Usuario no existe",
+      });
+    }
+
+    const deletedUser = await User.findByIdAndDelete(id);
+
+    if (!deletedUser) {
+      return res.status(500).json({
+        error: "Error al borrar usuario",
+      });
+    }
+
+    // Si el usuario tiene una imagen asociada, elimínala de Cloudinary
+    if (userExists.image) {
+      await deleteImgCloudinary(userExists.image);
+    }
+
+    return res.status(200).json({
+      message: "Usuario eliminado correctamente",
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      error: "Error general",
+      message: error.message,
+    });
+  }
+};
+
 
 //-------------------------------------------------------------------------------------------------------------------------
 
@@ -729,4 +765,5 @@ module.exports = {
   getAll,
   getByName,
   update,
+  deleteUser,
 };
