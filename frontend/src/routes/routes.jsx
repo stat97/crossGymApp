@@ -15,6 +15,7 @@ import { ForgotPassword } from '../pages/Password/ForgotPassword/ForgotPassword'
 import { CheckCode } from '../pages/CheckCode/CheckCode';
 import { ProtectedCheckChildren } from '../components';
 import { Dashboard } from '../pages/Dashboard/Dashboard';
+import { FormProfile } from '../pages/FormProfile/FormProfile';
 
 export const router = createBrowserRouter([
   {
@@ -68,20 +69,21 @@ export const router = createBrowserRouter([
         path: '/forgotPassword',
          element: <ForgotPassword />,
        },
+       {
+        path: '/profile',
+        element: (
+          <Protected>
+             <FormProfile />
+           </Protected>
+         ),
+      },
     //   {
     //     path: '/profiles',
     //     element: <ProfilePage />,
     //   },
      
      
-    //   {
-    //     path: '/profile',
-    //     element: (
-    //       <Protected>
-    //         <FormProfile />
-    //       </Protected>
-    //     ),
-    //   },
+      
 
        
     ],

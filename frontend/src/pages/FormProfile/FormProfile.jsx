@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { Link, NavLink, Navigate, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2/dist/sweetalert2.all.js';
 
-import { Uploadfile } from '../../components';
+import { Uploadfile } from '../../components/UploadFile/Uploadfile';
 import { useAuth } from '../../context/authContext';
 import { useDeleteUser, useUpdateError } from '../../hooks';
 import { update } from '../../services/user.service';
