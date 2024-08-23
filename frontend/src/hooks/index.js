@@ -5,3 +5,4 @@ export * from './useRegister/useRegisterError';
 export * from './usePassword/useForgotPasswordError';
 export * from './useVerificationCode/useCheckCodeError';
 export * from './useVerificationCode/useResendCodeError';
+export * from './useDelete/useDeleteUser';
