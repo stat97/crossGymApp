@@ -19,6 +19,7 @@ import { FormProfile } from '../pages/FormProfile/FormProfile';
 import { FormProfile2 } from '../pages/FormProfile/FormProfile2';
 import { FormProfile3 } from '../pages/FormProfile/FormProfile3';
 import { FormProfile4 } from '../pages/FormProfile/FormProfile4';
+import { FormProfile5 } from '../pages/FormProfile/FormProfile5';
 
 export const router = createBrowserRouter([
   {
@@ -101,6 +102,14 @@ export const router = createBrowserRouter([
         element: (
           <Protected>
              <FormProfile4 />
+           </Protected>
+         ),
+      },
+      {
+        path: '/profile5',
+        element: (
+          <Protected>
+             <FormProfile5 />
            </Protected>
          ),
       },

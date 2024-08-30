@@ -10,7 +10,7 @@ import { useDeleteUser, useUpdateError } from '../../hooks';
 import { update } from '../../services/user.service';
 import { Uploadfile } from '../../components/UploadFile/Uploadfile';
 
-export const FormProfile4 = () => {
+export const FormProfile5 = () => {
   const { user, setUser, setDeleteUser } = useAuth();
   const { handleSubmit } = useForm();
   const [res, setRes] = useState({});
@@ -19,8 +19,7 @@ export const FormProfile4 = () => {
   const navigate = useNavigate();
 
   const defaultData = {
-    height: user?.height,
-    weight: user?.weight,
+    gender: user?.gender,
     
   };
 
@@ -28,8 +27,7 @@ export const FormProfile4 = () => {
   const formSubmit = (formData) => {
     const fullData = {
       ...formData,
-        height: document.getElementById('height').value,
-        weight: document.getElementById('weight').value,
+        gender: document.getElementById('gender').value,
 
     };
 
@@ -68,35 +66,50 @@ export const FormProfile4 = () => {
       navigate('/profile5');
     }
   }, [updatedUser, navigate]);
-
   return (
     <>
-      
-          <form className="form-update-profile" onSubmit={handleSubmit(formSubmit)}>
-            <label htmlFor="height">Altura</label>
-            <input
-              className="input_user"
-              type="text"
-              id="height"
-              name="height"
-              autoComplete="off"
-              defaultValue={defaultData?.height}
-            />
-            <label htmlFor="weight">Peso</label>
-            <input
-              className="input_user"
-              type="text"
-              id="weight"
-              name="weight"
-              autoComplete="off"
-              defaultValue={defaultData?.weight}
-            />
-            
-            <button className="button--blue" type="submit" disabled={send}>
-              Siguiente
-            </button>
-          </form>
-       
+      <form className="form-update-profile" onSubmit={handleSubmit(formSubmit)}>
+        <h2 className="form-title">Selecciona tu género</h2>
+  
+        <div className="button-group">
+          <button 
+            type="button" 
+            className={`form-button ${selectedGender === 'Hombre' ? 'selected' : ''}`} 
+            onClick={() => setSelectedGender('Hombre')}
+          >
+            Hombre
+          </button>
+          <button 
+            type="button" 
+            className={`form-button ${selectedGender === 'Mujer' ? 'selected' : ''}`} 
+            onClick={() => setSelectedGender('Mujer')}
+          >
+            Mujer
+          </button>
+          <button 
+            type="button" 
+            className={`form-button ${selectedGender === 'No binario' ? 'selected' : ''}`} 
+            onClick={() => setSelectedGender('No binario')}
+          >
+            No binario
+          </button>
+          <button 
+            type="button" 
+            className={`form-button ${selectedGender === 'Prefiero no decirlo' ? 'selected' : ''}`} 
+            onClick={() => setSelectedGender('Prefiero no decirlo')}
+          >
+            Prefiero no decirlo
+          </button>
+        </div>
+  
+        <p className="form-note">
+          Esta información nos ayuda a establecer tu perfil.
+        </p>
+  
+        <button className="button-next" type="submit" disabled={send}>
+          Siguiente
+        </button>
+      </form>
     </>
   );
-};
+}
