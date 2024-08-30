@@ -59,6 +59,42 @@ const UserSchema = new Schema(
         ref: "Profile",
         
       },
+      birthDate: {
+        day: {
+          type: Number,
+          required: true,
+          min: 1,
+          max: 31,
+        },
+        month: {
+          type: Number,
+          required: true,
+          min: 1,
+          max: 12,
+        },
+        year: {
+          type: Number,
+          required: true,
+          validate: {
+            validator: function (value) {
+              return value > 1900 && value <= new Date().getFullYear();
+            },
+            message: "Please enter a valid year",
+          },
+        },
+      },
+      height:{
+        type:Number,
+        required:true,
+        min:1.20,
+        max:2.20,
+      },
+      weight:{
+        type:Number,
+        required:true,
+        min:30,
+        max:200,
+      }
 
   },
   { timestamps: true } //Refleja el momento exacto de la modificación
