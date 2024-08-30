@@ -73,18 +73,18 @@ export const Register = () => {
         <div className="form-register">
           <h4>SIGN UP</h4>
           <form onSubmit={handleSubmit(formSubmit)}>
-            <label htmlFor="input_user">
+            
+          <label htmlFor="input_email">
               <input
                 className="input_user"
-                type="text"
-                id="userName"
-                name="userFullName"
+                type="email"
+                id="email"
+                name="email"
                 autoComplete="false"
-                {...register('userFullName', { required: true })}
-                placeholder="Nombre"
+                {...register('email', { required: true })}
+                placeholder="Email"
               />
             </label>
-
             <label htmlFor="input_password">
               <input
                 className="input_user"
@@ -96,42 +96,7 @@ export const Register = () => {
                 placeholder="Password"
               />
             </label>
-
-            <label htmlFor="input_email">
-              <input
-                className="input_user"
-                type="email"
-                id="email"
-                name="email"
-                autoComplete="false"
-                {...register('email', { required: true })}
-                placeholder="Email"
-              />
-            </label>
-            <div className="gender">
-              <label htmlFor="hombre" className="label-radio hombre">
-                Hombre
-              </label>
-              <input
-                type="radio"
-                name="gender"
-                id="Male"
-                value="Male"
-                {...register('gender')}
-              />
-              <label htmlFor="mujer" className="label-radio mujer">
-                Mujer
-              </label>
-              <input
-                type="radio"
-                name="gender"
-                id="Female"
-                value="Female"
-                {...register('gender')}
-              />
-            </div>
-
-            <Uploadfile />
+            
             <div className="btn_container">
               <button className="button--blue" type="submit" disabled={send}>
                 Registro

@@ -1,9 +1,8 @@
 import './FormProfile.css';
 
-
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, NavLink, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2/dist/sweetalert2.all.js';
 
 import { Uploadfile } from '../../components/UploadFile/Uploadfile';
@@ -19,14 +18,20 @@ export const FormProfile = () => {
   const [updatedUser, setUpdatedUser] = useState(false);
   const navigate = useNavigate();
 
-
-
   const defaultData = {
     userName: user?.name,
+    userLastName: user?.lastName,
+
   };
 
-  //! ------------ 1) La funcion que gestiona el formulario----
+  //! ------------ 1) La función que gestiona el formulario----
   const formSubmit = (formData) => {
+    const fullData = {
+      ...formData,
+      userName: document.getElementById('userName').value,
+      userLastName: document.getElementById('userLastName').value,
+    };
+
     Swal.fire({
       title: 'Are you sure you want to change your data profile?',
       icon: 'warning',
@@ -38,32 +43,19 @@ export const FormProfile = () => {
       if (result.isConfirmed) {
         const inputFile = document.getElementById('file-upload').files;
 
-        if (inputFile.length != 0) {
-          const custonFormData = {
-            ...formData,
-            image: inputFile[0],
-          };
-          
+        const customFormData = {
+          ...fullData,
+          image: inputFile.length !== 0 ? inputFile[0] : undefined,
+        };
 
-          setSend(true);
-          setRes(await update(custonFormData));
-
-          setSend(false);
-        } else {
-          const custonFormData = {
-            ...formData,
-          };
-          setSend(true);
-          setRes(await update(custonFormData));
-          
-
-          setSend(false);
-        }
+        setSend(true);
+        setRes(await update(customFormData));
+        setSend(false);
       }
     });
   };
 
-  //! -------------- 2 ) useEffect que gestiona la parte de la respuesta ------- customHook
+  //! -------------- 2) useEffect que gestiona la parte de la respuesta ------- customHook
 
   useEffect(() => {
     useUpdateError(res, setRes, user, setUser, setUpdatedUser);
@@ -74,7 +66,7 @@ export const FormProfile = () => {
       setUpdatedUser(false);
       navigate('/dashboard');
     }
-  }, [res]);
+  }, [updatedUser, navigate]);
 
   return (
     <>
@@ -107,25 +99,23 @@ export const FormProfile = () => {
           </Link>
           <hr className="profile-setting__line" />
           <form className="form-update-profile" onSubmit={handleSubmit(formSubmit)}>
-            <label htmlFor="custom-input">Nombre</label>
+            <label htmlFor="userName">Nombre</label>
             <input
               className="input_user"
               type="text"
               id="userName"
               name="userName"
-              autoComplete="false"
+              autoComplete="off"
               defaultValue={defaultData?.userName}
-              {...register('userName')}
             />
-            <label htmlFor="custom-input">Apellidos</label>
-             <input
+            <label htmlFor="userLastName">Apellidos</label>
+            <input
               className="input_user"
               type="text"
-              id="userName"
-              apellido="apellido"
-              autoComplete="false"
-              defaultValue={defaultData?.userName}
-              {...register('userName')}
+              id="userLastName"
+              name="userLastName"
+              autoComplete="off"
+              defaultValue={defaultData?.userLastName}
             />
             <label htmlFor="file-upload-form">Change profile photo</label>
 
