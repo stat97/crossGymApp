@@ -13,6 +13,7 @@ const {
   getAll,
   getById,
   getByName,
+  update,
 } = require("../controllers/User.controllers");
 const express = require("express");
 const UserRoutes = express.Router();
@@ -31,6 +32,7 @@ UserRoutes.patch("/forgotpassword", changePassword);
 
 UserRoutes.patch("/changepassword", [isAuth], modifyPassword);
 UserRoutes.get("/byname/:name", [isAuth], getByName);
+UserRoutes.patch("/update/update", [isAuth], upload.single("image"), update);
 
 /// ------------------> rutas que pueden ser redirect
 UserRoutes.get("/register/sendMail/:id", sendCode); // :id ---> es el nombre del param

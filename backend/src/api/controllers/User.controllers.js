@@ -544,7 +544,6 @@ const update = async (req, res, next) => {
     patchUser.confirmationCode = req.user.confirmationCode;
     patchUser.email = req.user.email;
     patchUser.check = req.user.check;
-    patchUser.comments = req.user.comments;
     patchUser.profile = req.user.profile;
     patchUser.evaluation = req.user.evaluation;
      
