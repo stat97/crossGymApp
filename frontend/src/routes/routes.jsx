@@ -16,6 +16,9 @@ import { CheckCode } from '../pages/CheckCode/CheckCode';
 import { ProtectedCheckChildren } from '../components';
 import { Dashboard } from '../pages/Dashboard/Dashboard';
 import { FormProfile } from '../pages/FormProfile/FormProfile';
+import { FormProfile2 } from '../pages/FormProfile/FormProfile2';
+import { FormProfile3 } from '../pages/FormProfile/FormProfile3';
+import { FormProfile4 } from '../pages/FormProfile/FormProfile4';
 
 export const router = createBrowserRouter([
   {
@@ -74,6 +77,30 @@ export const router = createBrowserRouter([
         element: (
           <Protected>
              <FormProfile />
+           </Protected>
+         ),
+      },
+      {
+        path: '/profile2',
+        element: (
+          <Protected>
+             <FormProfile2 />
+           </Protected>
+         ),
+      },
+      {
+        path: '/profile3',
+        element: (
+          <Protected>
+             <FormProfile3 />
+           </Protected>
+         ),
+      },
+      {
+        path: '/profile4',
+        element: (
+          <Protected>
+             <FormProfile4 />
            </Protected>
          ),
       },

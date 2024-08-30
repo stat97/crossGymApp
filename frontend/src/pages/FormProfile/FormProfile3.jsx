@@ -10,7 +10,7 @@ import { useDeleteUser, useUpdateError } from '../../hooks';
 import { update } from '../../services/user.service';
 import { Uploadfile } from '../../components/UploadFile/Uploadfile';
 
-export const FormProfile = () => {
+export const FormProfile3 = () => {
   const { user, setUser, setDeleteUser } = useAuth();
   const { handleSubmit } = useForm();
   const [res, setRes] = useState({});
@@ -19,16 +19,21 @@ export const FormProfile = () => {
   const navigate = useNavigate();
 
   const defaultData = {
-    userName: user?.name,
-    userLastName: user?.lastName,
+    userBirthDateDay: user?.birthDate?.day, 
+    userBirthDateMonth: user?.birthDate?.month,
+    userBirthDateYear: user?.birthDate?.year,
   };
 
   //! ------------ 1) La función que gestiona el formulario----
   const formSubmit = (formData) => {
     const fullData = {
       ...formData,
-      userName: document.getElementById('userName').value,
-      userLastName: document.getElementById('userLastName').value,
+      birthDate: {
+        day: document.getElementById('userBirthDateDay').value,
+        month: document.getElementById('userBirthDateMonth').value,
+        year: document.getElementById('userBirthDateYear').value,
+      },
+
     };
 
     Swal.fire({
@@ -63,58 +68,40 @@ export const FormProfile = () => {
   useEffect(() => {
     if (updatedUser) {
       setUpdatedUser(false);
-      navigate('/profile2');
+      navigate('/profile4');
     }
   }, [updatedUser, navigate]);
 
   return (
     <>
-      <div className="div-user-profile-setting">
-        <div className="div-user-profile-setting-card">
-          <figure className="dataProfile">
-            <h4>Crear perfil</h4>
-            <img className="profile-photo" src={user.image} alt="foto User" />
-          </figure>
-          <h5 className="user-profile-text">
-            Hi {}
-            <span
-              style={{
-                textDecoration: 'underline',
-                textDecorationColor: '#97f85b',
-                textDecorationThickness: '3px',
-              }}
-            >
-              {user.name}
-            </span>
-            , you can make changes to your user profile
-          </h5>
-        
-          <Link
-            className="delete-user"
-            onClick={() => useDeleteUser(user, setUser, setDeleteUser)}
-            style={{ cursor: 'pointer' }}
-          >
-            Delete user
-          </Link>
-          <hr className="profile-setting__line" />
+      
           <form className="form-update-profile" onSubmit={handleSubmit(formSubmit)}>
-            <label htmlFor="userName">Nombre</label>
+            <label htmlFor="userBirthDateDay">Dia</label>
             <input
               className="input_user"
               type="text"
-              id="userName"
-              name="userName"
+              id="userBirthDateDay"
+              name=" userBirthDateDay"
               autoComplete="off"
-              defaultValue={defaultData?.userName}
+              defaultValue={defaultData?. userBirthDateDay}
             />
-            <label htmlFor="userLastName">Apellidos</label>
+            <label htmlFor="userBirthDateMonth">Mes</label>
             <input
               className="input_user"
               type="text"
-              id="userLastName"
-              name="userLastName"
+              id="userBirthDateMonth"
+              name=" userBirthDateMonth"
               autoComplete="off"
-              defaultValue={defaultData?.userLastName}
+              defaultValue={defaultData?. userBirthDateMonth}
+            />
+             <label htmlFor= "userBirthDateYear">Year </label>
+             <input
+              className="input_user"
+              type="text"
+              id="userBirthDateYear"
+              name=" userBirthDateYear"
+              autoComplete="off"
+              defaultValue={defaultData?. userBirthDateYear}
             />
            
 
@@ -122,8 +109,7 @@ export const FormProfile = () => {
               Siguiente
             </button>
           </form>
-        </div>
-      </div>
+       
     </>
   );
 };

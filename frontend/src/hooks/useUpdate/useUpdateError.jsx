@@ -30,6 +30,13 @@ export const useUpdateError = (res, setRes, user, setUser, setUpdatedUser) => {
       const userUpdate = {
         userName: res?.data?.updateUser?.userName,
         userLastName: res?.data?.updateUser?.userLastName,
+        birthDate: {
+            day: res?.data?.updateUser?.birthDate?.day,
+            month: res?.data?.updateUser?.birthDate?.month ,
+            year: res?.data?.updateUser?.birthDate?.year,
+          },
+        height: res?.data?.updateUser?.height,
+        weight: res?.data?.updateUser?.weight,
         email: res?.data?.updateUser?.email,
         image: res?.data?.updateUser?.image,
         check: res?.data?.updateUser?.check,

@@ -10,7 +10,7 @@ import { useDeleteUser, useUpdateError } from '../../hooks';
 import { update } from '../../services/user.service';
 import { Uploadfile } from '../../components/UploadFile/Uploadfile';
 
-export const FormProfile = () => {
+export const FormProfile4 = () => {
   const { user, setUser, setDeleteUser } = useAuth();
   const { handleSubmit } = useForm();
   const [res, setRes] = useState({});
@@ -19,16 +19,18 @@ export const FormProfile = () => {
   const navigate = useNavigate();
 
   const defaultData = {
-    userName: user?.name,
-    userLastName: user?.lastName,
+    height: user?.height,
+    weight: user?.weight,
+    
   };
 
   //! ------------ 1) La función que gestiona el formulario----
   const formSubmit = (formData) => {
     const fullData = {
       ...formData,
-      userName: document.getElementById('userName').value,
-      userLastName: document.getElementById('userLastName').value,
+        height: document.getElementById('height').value,
+        weight: document.getElementById('weight').value,
+
     };
 
     Swal.fire({
@@ -63,67 +65,38 @@ export const FormProfile = () => {
   useEffect(() => {
     if (updatedUser) {
       setUpdatedUser(false);
-      navigate('/profile2');
+      navigate('/profile4');
     }
   }, [updatedUser, navigate]);
 
   return (
     <>
-      <div className="div-user-profile-setting">
-        <div className="div-user-profile-setting-card">
-          <figure className="dataProfile">
-            <h4>Crear perfil</h4>
-            <img className="profile-photo" src={user.image} alt="foto User" />
-          </figure>
-          <h5 className="user-profile-text">
-            Hi {}
-            <span
-              style={{
-                textDecoration: 'underline',
-                textDecorationColor: '#97f85b',
-                textDecorationThickness: '3px',
-              }}
-            >
-              {user.name}
-            </span>
-            , you can make changes to your user profile
-          </h5>
-        
-          <Link
-            className="delete-user"
-            onClick={() => useDeleteUser(user, setUser, setDeleteUser)}
-            style={{ cursor: 'pointer' }}
-          >
-            Delete user
-          </Link>
-          <hr className="profile-setting__line" />
+      
           <form className="form-update-profile" onSubmit={handleSubmit(formSubmit)}>
-            <label htmlFor="userName">Nombre</label>
+            <label htmlFor="height">Altura</label>
             <input
               className="input_user"
               type="text"
-              id="userName"
-              name="userName"
+              id="height"
+              name="height"
               autoComplete="off"
-              defaultValue={defaultData?.userName}
+              defaultValue={defaultData?.height}
             />
-            <label htmlFor="userLastName">Apellidos</label>
+            <label htmlFor="weight">Peso</label>
             <input
               className="input_user"
               type="text"
-              id="userLastName"
-              name="userLastName"
+              id="weight"
+              name="weight"
               autoComplete="off"
-              defaultValue={defaultData?.userLastName}
+              defaultValue={defaultData?.weight}
             />
-           
-
+            
             <button className="button--blue" type="submit" disabled={send}>
               Siguiente
             </button>
           </form>
-        </div>
-      </div>
+       
     </>
   );
 };
