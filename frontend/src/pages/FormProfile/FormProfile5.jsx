@@ -2,13 +2,12 @@ import './FormProfile.css';
 
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2/dist/sweetalert2.all.js';
 
 import { useAuth } from '../../context/authContext';
-import { useDeleteUser, useUpdateError } from '../../hooks';
+import { useUpdateError } from '../../hooks';
 import { update } from '../../services/user.service';
-import { Uploadfile } from '../../components/UploadFile/Uploadfile';
 
 export const FormProfile5 = () => {
   const { user, setUser, setDeleteUser } = useAuth();
@@ -20,15 +19,13 @@ export const FormProfile5 = () => {
 
   const defaultData = {
     gender: user?.gender,
-    
   };
 
   //! ------------ 1) La función que gestiona el formulario----
   const formSubmit = (formData) => {
     const fullData = {
       ...formData,
-        gender: document.getElementById('gender').value,
-
+      gender: document.querySelector('input[name="gender"]:checked').value,
     };
 
     Swal.fire({
@@ -55,7 +52,6 @@ export const FormProfile5 = () => {
   };
 
   //! -------------- 2) useEffect que gestiona la parte de la respuesta ------- customHook
-
   useEffect(() => {
     useUpdateError(res, setRes, user, setUser, setUpdatedUser);
   }, [res]);
@@ -63,53 +59,63 @@ export const FormProfile5 = () => {
   useEffect(() => {
     if (updatedUser) {
       setUpdatedUser(false);
-      navigate('/profile5');
+      navigate('/profile6');
     }
   }, [updatedUser, navigate]);
+
+
   return (
     <>
       <form className="form-update-profile" onSubmit={handleSubmit(formSubmit)}>
         <h2 className="form-title">Selecciona tu género</h2>
-  
+
         <div className="button-group">
-          <button 
-            type="button" 
-            className={`form-button ${selectedGender === 'Hombre' ? 'selected' : ''}`} 
-            onClick={() => setSelectedGender('Hombre')}
-          >
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="Hombre"
+              defaultChecked={defaultData.gender === 'Hombre'}
+            />
             Hombre
-          </button>
-          <button 
-            type="button" 
-            className={`form-button ${selectedGender === 'Mujer' ? 'selected' : ''}`} 
-            onClick={() => setSelectedGender('Mujer')}
-          >
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="Mujer"
+              defaultChecked={defaultData.gender === 'Mujer'}
+            />
             Mujer
-          </button>
-          <button 
-            type="button" 
-            className={`form-button ${selectedGender === 'No binario' ? 'selected' : ''}`} 
-            onClick={() => setSelectedGender('No binario')}
-          >
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="No binario"
+              defaultChecked={defaultData.gender === 'No binario'}
+            />
             No binario
-          </button>
-          <button 
-            type="button" 
-            className={`form-button ${selectedGender === 'Prefiero no decirlo' ? 'selected' : ''}`} 
-            onClick={() => setSelectedGender('Prefiero no decirlo')}
-          >
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="Prefiero no decirlo"
+              defaultChecked={defaultData.gender === 'Prefiero no decirlo'}
+            />
             Prefiero no decirlo
-          </button>
+          </label>
         </div>
-  
+
         <p className="form-note">
           Esta información nos ayuda a establecer tu perfil.
         </p>
-  
+
         <button className="button-next" type="submit" disabled={send}>
           Siguiente
         </button>
       </form>
     </>
   );
-}
+};

@@ -20,6 +20,9 @@ import { FormProfile2 } from '../pages/FormProfile/FormProfile2';
 import { FormProfile3 } from '../pages/FormProfile/FormProfile3';
 import { FormProfile4 } from '../pages/FormProfile/FormProfile4';
 import { FormProfile5 } from '../pages/FormProfile/FormProfile5';
+import { FormProfile6 } from '../pages/FormProfile/FormProfile6';
+import { FormProfile7 } from '../pages/FormProfile/FormProfile7';
+import { FormProfile8 } from '../pages/FormProfile/FormProfile8';
 
 export const router = createBrowserRouter([
   {
@@ -110,6 +113,30 @@ export const router = createBrowserRouter([
         element: (
           <Protected>
              <FormProfile5 />
+           </Protected>
+         ),
+      },
+      {
+        path: '/profile6',
+        element: (
+          <Protected>
+             <FormProfile6 />
+           </Protected>
+         ),
+      },
+      {
+        path: '/profile7',
+        element: (
+          <Protected>
+             <FormProfile7 />
+           </Protected>
+         ),
+      },
+      {
+        path: '/profile8',
+        element: (
+          <Protected>
+             <FormProfile8 />
            </Protected>
          ),
       },

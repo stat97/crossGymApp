@@ -89,13 +89,7 @@ export const FormProfile = () => {
             , you can make changes to your user profile
           </h5>
         
-          <Link
-            className="delete-user"
-            onClick={() => useDeleteUser(user, setUser, setDeleteUser)}
-            style={{ cursor: 'pointer' }}
-          >
-            Delete user
-          </Link>
+         
           <hr className="profile-setting__line" />
           <form className="form-update-profile" onSubmit={handleSubmit(formSubmit)}>
             <label htmlFor="userName">Nombre</label>

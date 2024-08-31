@@ -8,43 +8,43 @@ import { useAuth } from '../../context/authContext';
 import { useUpdateError } from '../../hooks';
 import { update } from '../../services/user.service';
 
-export const FormProfile4 = () => {
+export const FormProfile8 = () => {
   const { user, setUser } = useAuth();
-  const { handleSubmit } = useForm();
+  const { handleSubmit, setValue } = useForm();
   const [res, setRes] = useState({});
   const [send, setSend] = useState(false);
   const [updatedUser, setUpdatedUser] = useState(false);
+  const [selectedSports, setSelectedSports] = useState(user?.sports || []);
   const navigate = useNavigate();
 
   const defaultData = {
-    height: user?.height,
-    weight: user?.weight,
+    sports: user?.sports || [],
+  };
+
+  const handleSportChange = (event) => {
+    const { value, checked } = event.target;
+    setSelectedSports((prevSports) =>
+      checked ? [...prevSports, value] : prevSports.filter(sport => sport !== value)
+    );
   };
 
   const formSubmit = async (formData) => {
     const fullData = {
       ...formData,
-      height: document.getElementById('height').value,
-      weight: document.getElementById('weight').value,
+      sports: selectedSports,
     };
 
     Swal.fire({
-      title: 'Are you sure you want to change your data profile?',
+      title: '¿Estás seguro de que quieres cambiar tus deportes?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: 'rgb(73, 193, 162)',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'YES',
+      confirmButtonText: 'SÍ',
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const inputFile = document.getElementById('file-upload');
-        const customFormData = {
-          ...fullData,
-          image: inputFile?.files.length ? inputFile.files[0] : undefined,
-        };
-
         setSend(true);
-        const response = await update(customFormData);
+        const response = await update(fullData);
         setRes(response);
         setSend(false);
       }
@@ -61,32 +61,30 @@ export const FormProfile4 = () => {
   useEffect(() => {
     if (updatedUser) {
       setUpdatedUser(false);
-      navigate('/profile5');
+      navigate('/profile7');
     }
   }, [updatedUser, navigate]);
 
   return (
     <form className="form-update-profile" onSubmit={handleSubmit(formSubmit)}>
-      <label htmlFor="height">Altura</label>
-      <input
-        className="input_user"
-        type="text"
-        id="height"
-        name="height"
-        autoComplete="off"
-        defaultValue={defaultData?.height}
-      />
-      <label htmlFor="weight">Peso</label>
-      <input
-        className="input_user"
-        type="text"
-        id="weight"
-        name="weight"
-        autoComplete="off"
-        defaultValue={defaultData?.weight}
-      />
+      <fieldset>
+        <legend>Selecciona los deportes que practicas</legend>
+        <div className="checkbox-group">
+          {['Fitness', 'Rocódromo', 'Yoga', 'Entrenamiento Personal', 'Crosstraining', 'Deka/Hyrox'].map((sport) => (
+            <label key={sport} className="checkbox-label">
+              <input
+                type="checkbox"
+                value={sport}
+                checked={selectedSports.includes(sport)}
+                onChange={handleSportChange}
+              />
+              {sport}
+            </label>
+          ))}
+        </div>
+      </fieldset>
       <button className="button--blue" type="submit" disabled={send}>
-        Siguiente
+        Actualizar
       </button>
     </form>
   );
