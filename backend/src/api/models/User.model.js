@@ -28,8 +28,9 @@ const UserSchema = new Schema(
     },
     gender: {
       type: String,
-      enum: ["Male", "Female", "Others"],
+      enum: ["Hombre", "Mujer", "No binario","Prefiero no decirlo"],
       required: true,
+      trim:true,
     },
     rol: {
       type: String,
@@ -86,14 +87,22 @@ const UserSchema = new Schema(
       height:{
         type:Number,
         required:true,
-        min:1.20,
-        max:2.20,
+        trim:true,
       },
       weight:{
         type:Number,
         required:true,
-        min:30,
-        max:200,
+        trim:true,
+      },
+      objective:{
+        type:String,
+        required:true,
+        trim:true,
+      },
+      sports:{
+        type:String,
+        required:true,
+        trim:true,
       }
 
   },
