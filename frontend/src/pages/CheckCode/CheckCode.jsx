@@ -93,7 +93,7 @@ export const CheckCode = () => {
     if (!localStorage.getItem('user')) {
       useAutoLogin(allUser, login);
     } else {
-      return <Navigate to="/FormProfile" />;
+      return <Navigate to="/profile" />;
     }
     
   }
