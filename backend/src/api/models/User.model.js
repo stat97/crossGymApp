@@ -8,13 +8,11 @@ const UserSchema = new Schema(
   {
     userName: {
       type: String,
-      required: true,
       unique: true,
       trim: true,
     },
     userLastName: {
       type: String,
-      required: true,
       unique: true,
       trim: true,
     },
@@ -29,7 +27,6 @@ const UserSchema = new Schema(
     gender: {
       type: String,
       enum: ["Hombre", "Mujer", "No binario","Prefiero no decirlo"],
-      required: true,
       trim:true,
     },
     rol: {
@@ -63,19 +60,19 @@ const UserSchema = new Schema(
       birthDate: {
         day: {
           type: Number,
-          required: true,
+          
           min: 1,
           max: 31,
         },
         month: {
           type: Number,
-          required: true,
+          
           min: 1,
           max: 12,
         },
         year: {
           type: Number,
-          required: true,
+          
           validate: {
             validator: function (value) {
               return value > 1900 && value <= new Date().getFullYear();
@@ -86,22 +83,22 @@ const UserSchema = new Schema(
       },
       height:{
         type:Number,
-        required:true,
+        
         trim:true,
       },
       weight:{
         type:Number,
-        required:true,
+        
         trim:true,
       },
       objective:{
         type:String,
-        required:true,
+        
         trim:true,
       },
       sports:{
         type:String,
-        required:true,
+     
         trim:true,
       }
 

@@ -22,35 +22,47 @@ dotenv.config();
 //---------------------------------* REGISTER WITH REDIRECT *-------------------------------------------------------
 
 
-
-const registerWithRedirect = async (req, res) => {
+const registerWithRedirect = async (req, res, next) => {
   try {
-    const { email, password} = req.body;
-
-    // Verificar si el usuario ya existe
-    const existingUser = await User.findOne({ email });
-
-    if (existingUser) {
-      return res.status(409).json({ error: 'Este usuario ya existe' });
-    }
-
-    const newUser = new User({
-      email,
-      password,
-      confirmationCode,
-      image: "https://pic.onlinewebfonts.com/svg/img_181369.png", // Imagen por defecto
+    await User.syncIndexes();  // Sincroniza los índices del modelo de usuario.
+    
+    let confirmationCode = randomCode();  // Genera un código de confirmación aleatorio.
+    
+    // Verifica si el usuario ya existe por su correo electrónico o nombre de usuario.
+    const userExist = await User.findOne({ 
+      email: req.body.email,
     });
+    
+    if (!userExist) {
+      // Crea un nuevo usuario con los datos proporcionados y el código de confirmación.
+      const newUser = new User({ 
+        ...req.body, 
+        confirmationCode,
+        image: "https://pic.onlinewebfonts.com/svg/img_181369.png"  // Asigna una imagen predeterminada.
+      });
 
-    await newUser.save();
+      try {
+        const userSave = await newUser.save();  // Guarda el nuevo usuario en la base de datos.
+        const PORT = process.env.PORT;
 
-    res.status(201).json({ message: 'Usuario registrado con éxito' });
+        if (userSave) {
+          return res.redirect(
+            303,
+            `http://localhost:${PORT}/api/v1/users/register/sendMail/${userSave._id}`
+          );
+        }
+      } catch (error) {
+        return res.status(404).json(error.message);  // Devuelve un error 404 si no se pudo guardar el usuario.
+      }
+    } else {
+      return res.status(409).json("Este usuario ya existe");  // Devuelve un error 409 si el usuario ya existe.
+    }
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error interno del servidor' });
+    return next(error);  // Maneja cualquier otro error que ocurra.
   }
 };
 
-module.exports = { registerWithRedirect };
+  
 
 
 //-------------------CONTROLADORES QUE PUEDEN SER REDIRECT-------------------------------------------
