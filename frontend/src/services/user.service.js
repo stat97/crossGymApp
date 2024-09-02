@@ -3,14 +3,17 @@ import { extraConfig } from './serviceApiGeneral.config';
 
 //* ------------------ endPoints sin auth ---------------------------------------
 
-//* Register with redirect
 export const registerWithRedirect = async (formData) => {
   const APIGeneral = extraConfig();
-  return APIGeneral.post('/users/register', formData)
-   
-    .then((res) => res)
-    .catch((error) => error);
+  try {
+    const response = await APIGeneral.post('/users/register', formData);
+    return response;
+  } catch (error) {
+    console.error('Error en el registro:', error.response?.data || error.message);
+    return error;
+  }
 };
+
 
 //*Resend code
 export const resendCode = async (formData) => {
