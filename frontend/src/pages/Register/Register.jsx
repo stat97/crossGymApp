@@ -1,5 +1,4 @@
 import './Register.css';
-
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
@@ -9,15 +8,12 @@ import { useRegisterError } from '../../hooks/useRegister/useRegisterError';
 import { registerWithRedirect } from '../../services/user.service';
 
 export const Register = () => {
-  // `allUser` es la respuesta completa del servicio de registro (status 200)
   const navigate = useNavigate();
   const { allUser, setAllUser, bridgeData, setDeleteUser } = useAuth();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, watch, setError, clearErrors, formState: { errors } } = useForm();
   const [res, setRes] = useState({});
   const [send, setSend] = useState(false);
   const [okRegister, setOkRegister] = useState(false);
-
-  //------------------------------* Función para enviar el formulario *-------------------------------------------------------------
 
   const formSubmit = async (formData) => {
     const customFormData = {
@@ -27,8 +23,6 @@ export const Register = () => {
     setRes(await registerWithRedirect(customFormData));
     setSend(false);
   };
-
-  //------------------------------* Efecto para manejar la respuesta del formulario *-------------------------------------------------------------
 
   useEffect(() => {
     console.log(res);
@@ -44,11 +38,13 @@ export const Register = () => {
     setDeleteUser(() => false);
   }, []);
 
-  //------------------------------* Manejo del estado de navegación *-------------------------------------------------------------
-
   if (okRegister) {
     return <Navigate to="/verifyCode" />;
   }
+
+  // Watch password fields
+  const password = watch('password');
+  const confirmPassword = watch('confirmPassword');
 
   return (
     <div className="register_container">
@@ -62,9 +58,10 @@ export const Register = () => {
               id="email"
               name="email"
               autoComplete="off"
-              {...register('email', { required: true })}
+              {...register('email', { required: 'Correo electrónico es requerido' })}
               placeholder="Correo electrónico"
             />
+            {errors.email && <p>{errors.email.message}</p>}
           </label>
           <label htmlFor="password">
             <input
@@ -73,9 +70,26 @@ export const Register = () => {
               id="password"
               name="password"
               autoComplete="off"
-              {...register('password', { required: true })}
+              {...register('password', { required: 'Contraseña es requerida' })}
               placeholder="Contraseña"
             />
+            {errors.password && <p>{errors.password.message}</p>}
+          </label>
+          <label htmlFor="confirmPassword">
+            <input
+              className="input_Password1"
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              autoComplete="off"
+              {...register('confirmPassword', {
+                required: 'Confirmar contraseña es requerido',
+                validate: value =>
+                  value === password || 'Las contraseñas no coinciden'
+              })}
+              placeholder="Repita su contraseña"
+            />
+            {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
           </label>
           <div className="btn_container">
             <button className="button--blue" type="submit" disabled={send}>
