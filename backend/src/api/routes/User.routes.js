@@ -19,7 +19,7 @@ const express = require("express");
 const UserRoutes = express.Router();
 
 //! ---------------- endPoints sin auth ---------------------------------------
-UserRoutes.post("/register", upload.single("image"), registerWithRedirect);
+UserRoutes.post("/register", registerWithRedirect);
 UserRoutes.post("/resend", resendCode);
 UserRoutes.post("/check", checkNewUser);
 UserRoutes.post("/login", login);

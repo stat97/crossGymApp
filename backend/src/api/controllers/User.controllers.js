@@ -21,46 +21,38 @@ dotenv.config();
 
 //---------------------------------* REGISTER WITH REDIRECT *-------------------------------------------------------
 
-const registerWithRedirect = async (req, res, next) => {
-  let catchImg = req.file?.path;
-  try {
-    await User.syncIndexes();
-    let confirmationCode = randomCode();
-    const userExist = await User.findOne(
-      { email: req.body.email },
-      { userFullName: req.body.userFullName }
-    );
-    if (!userExist) {
-      const newUser = new User({ ...req.body, confirmationCode });
-      if (req.file) {
-        newUser.image = req.file.path;
-      } else {
-        newUser.image = "https://pic.onlinewebfonts.com/svg/img_181369.png";
-      }
 
-      try {
-        const userSave = await newUser.save();
-        const PORT = process.env.PORT;
-        if (userSave) {
-          return res.redirect(
-            303,
-            `http://localhost:${PORT}/api/v1/users/register/sendMail/${userSave._id}`
-          );
-        }
-      } catch (error) {
-        return res.status(404).json(error.message);
-      }
-    } else {
-      if (req.file) deleteImgCloudinary(catchImg);
-      return res.status(409).json("Este usuario ya existe");
+
+const registerWithRedirect = async (req, res) => {
+  try {
+    const { email, password} = req.body;
+
+    // Verificar si el usuario ya existe
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return res.status(409).json({ error: 'Este usuario ya existe' });
     }
+
+    const newUser = new User({
+      email,
+      password,
+      confirmationCode,
+      image: "https://pic.onlinewebfonts.com/svg/img_181369.png", // Imagen por defecto
+    });
+
+    await newUser.save();
+
+    res.status(201).json({ message: 'Usuario registrado con éxito' });
   } catch (error) {
-    if (req.file) {
-      deleteImgCloudinary(catchImg);
-    }
-    return next(error);
+    console.error(error);
+    res.status(500).json({ error: 'Error interno del servidor' });
   }
 };
+
+module.exports = { registerWithRedirect };
+
+
 //-------------------CONTROLADORES QUE PUEDEN SER REDIRECT-------------------------------------------
 
 /* Se llaman por sí mismos por parte del cliente o vía redirect, como controladores de funciones accesorias */
