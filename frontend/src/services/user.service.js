@@ -6,9 +6,8 @@ import { extraConfig } from './serviceApiGeneral.config';
 //* Register with redirect
 export const registerWithRedirect = async (formData) => {
   const APIGeneral = extraConfig();
-  return APIGeneral.post('/users/register', formData, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  })
+  return APIGeneral.post('/users/register', formData)
+   
     .then((res) => res)
     .catch((error) => error);
 };
