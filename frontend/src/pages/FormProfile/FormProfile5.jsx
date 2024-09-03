@@ -25,7 +25,7 @@ export const FormProfile5 = () => {
   const formSubmit = (formData) => {
     const fullData = {
       ...formData,
-      gender: document.querySelector('input[name="gender"]:checked').value,
+      gender: formData.gender,
     };
 
     Swal.fire({

@@ -18,7 +18,7 @@ export const useUpdateError = (res, setRes, user, setUser, setUpdatedUser) => {
         console.log(`Checking clave: ${clave}, value: ${item[clave]}`);
         
         // Incrementa el contador si el valor es true
-        if (item[clave] === true) {
+        if (item[clave] === false) {
           contador++;
         }
       }

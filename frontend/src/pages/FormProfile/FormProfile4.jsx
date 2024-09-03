@@ -17,15 +17,15 @@ export const FormProfile4 = () => {
   const navigate = useNavigate();
 
   const defaultData = {
-    height: user?.height,
-    weight: user?.weight,
+    height: user?.height?? '',
+    weight: user?.weight?? '',
   };
 
   const formSubmit = async (formData) => {
     const fullData = {
       ...formData,
-      height: document.getElementById('height').value,
-      weight: document.getElementById('weight').value,
+      height: formData.height,
+      weight: formData.weight,
     };
 
     Swal.fire({

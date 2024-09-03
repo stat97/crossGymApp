@@ -60,6 +60,7 @@ export const FormProfile3 = () => {
 
   useEffect(() => {
     if (updatedUser) {
+      setUpdatedUser(false);
       navigate('/profile4');
     }
   }, [updatedUser, navigate]);

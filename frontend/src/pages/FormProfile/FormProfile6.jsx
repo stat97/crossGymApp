@@ -17,12 +17,13 @@ export const FormProfile6 = () => {
   const navigate = useNavigate();
 
   const defaultData = {
-    job: user?.job,
+    job: user?.job?? '',
   };
 
   const formSubmit = async (formData) => {
     const fullData = {
       ...formData,
+      job: formData.job,
     };
 
     Swal.fire({
@@ -34,8 +35,14 @@ export const FormProfile6 = () => {
       confirmButtonText: 'SÍ',
     }).then(async (result) => {
       if (result.isConfirmed) {
+        const inputFile = document.getElementById('file-upload');
+        const customFormData = {
+          ...fullData,
+          image: inputFile?.files.length ? inputFile.files[0] : undefined,
+        };
+
         setSend(true);
-        const response = await update(fullData);
+        const response = await update(customFormData);
         setRes(response);
         setSend(false);
       }
@@ -66,10 +73,10 @@ export const FormProfile6 = () => {
         name="job"
         autoComplete="off"
         defaultValue={defaultData?.job}
-        {...register('job', { required: true })}
+
       />
       <button className="button--blue" type="submit" disabled={send}>
-        Actualizar
+        Siguiente
       </button>
     </form>
   );
