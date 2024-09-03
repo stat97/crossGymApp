@@ -83,7 +83,7 @@ button:hover:not(:disabled) {
 }
 
 /* Profile Image Upload */
-.profile-pic {
+.profile-photo {
     display: block;
     margin: 0 auto 20px;
     width: 150px;
@@ -139,4 +139,7 @@ button:hover:not(:disabled) {
 
 .steps .step.active::before {
     background-color: #0056b3;
+}
+.sportprofile{
+  
 }

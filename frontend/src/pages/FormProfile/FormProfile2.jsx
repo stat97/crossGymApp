@@ -9,6 +9,7 @@ import { Uploadfile } from '../../components/UploadFile/Uploadfile';
 import { useAuth } from '../../context/authContext';
 import { useUpdateError } from '../../hooks';
 import { update } from '../../services/user.service';
+import { ProfileSteps } from '../../components/ProfileSteps/ProfileSteps';
 
 export const FormProfile2 = () => {
   const { user, setUser } = useAuth();
@@ -63,6 +64,7 @@ export const FormProfile2 = () => {
 
   return (
     <>
+    <ProfileSteps/>
       <form className="form-update-profile" onSubmit={handleSubmit(formSubmit)}>
         <label htmlFor="file-upload-form">Change profile photo</label>
         <Uploadfile />

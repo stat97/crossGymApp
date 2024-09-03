@@ -7,6 +7,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.all.js';
 import { useAuth } from '../../context/authContext';
 import { useUpdateError } from '../../hooks';
 import { update } from '../../services/user.service';
+import { ProfileSteps } from '../../components/ProfileSteps/ProfileSteps';
 
 export const FormProfile6 = () => {
   const { user, setUser } = useAuth();
@@ -64,8 +65,10 @@ export const FormProfile6 = () => {
   }, [updatedUser, navigate]);
 
   return (
+    <>
+    <ProfileSteps/>
     <form className="form-update-profile" onSubmit={handleSubmit(formSubmit)}>
-      <label htmlFor="job">Trabajo</label>
+      <label htmlFor="job">¿Cuál es tu actual profesión?</label>
       <input
         className="input_user"
         type="text"
@@ -79,5 +82,6 @@ export const FormProfile6 = () => {
         Siguiente
       </button>
     </form>
+    </>
   );
 };

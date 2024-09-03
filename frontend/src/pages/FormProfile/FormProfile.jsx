@@ -9,6 +9,8 @@ import { useAuth } from '../../context/authContext';
 import { useDeleteUser, useUpdateError } from '../../hooks';
 import { update } from '../../services/user.service';
 import { Uploadfile } from '../../components/UploadFile/Uploadfile';
+import { ProgressBar } from '../../components/ProgressBar/ProgressBar';
+import { ProfileSteps } from '../../components/ProfileSteps/ProfileSteps';
 
 export const FormProfile = () => {
   const { user, setUser, setDeleteUser } = useAuth();
@@ -66,9 +68,11 @@ export const FormProfile = () => {
       navigate('/profile2');
     }
   }, [updatedUser, navigate]);
-
+ 
   return (
     <>
+
+    <ProfileSteps/>
       <div className="div-user-profile-setting">
         <div className="div-user-profile-setting-card">
           <figure className="dataProfile">
@@ -76,17 +80,8 @@ export const FormProfile = () => {
             <img className="profile-photo" src={user.image} alt="foto User" />
           </figure>
           <h5 className="user-profile-text">
-            Hi {}
-            <span
-              style={{
-                textDecoration: 'underline',
-                textDecorationColor: '#97f85b',
-                textDecorationThickness: '3px',
-              }}
-            >
-              {user.name}
-            </span>
-            , you can make changes to your user profile
+            
+            
           </h5>
         
          

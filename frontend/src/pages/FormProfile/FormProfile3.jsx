@@ -6,6 +6,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.all.js';
 import { useAuth } from '../../context/authContext';
 import { useUpdateError } from '../../hooks';
 import { update } from '../../services/user.service';
+import { ProfileSteps } from '../../components/ProfileSteps/ProfileSteps';
 
 export const FormProfile3 = () => {
   const { user, setUser } = useAuth();
@@ -66,7 +67,10 @@ export const FormProfile3 = () => {
   }, [updatedUser, navigate]);
 
   return (
+    <>
+    <ProfileSteps/>
     <form className="form-update-profile" onSubmit={handleSubmit(formSubmit)}>
+      <h3>Introduce tu fecha de nacimiento</h3>
       <label htmlFor="userBirthDateDay">Dia</label>
       <input
         className="input_user"
@@ -85,7 +89,7 @@ export const FormProfile3 = () => {
         autoComplete="off"
         defaultValue={defaultData.userBirthDateMonth}
       />
-      <label htmlFor="userBirthDateYear">Year</label>
+      <label htmlFor="userBirthDateYear">Año</label>
       <input
         className="input_user"
         type="text"
@@ -98,5 +102,7 @@ export const FormProfile3 = () => {
         Siguiente
       </button>
     </form>
+    </>
   );
 };
+

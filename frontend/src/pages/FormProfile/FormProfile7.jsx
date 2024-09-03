@@ -7,6 +7,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.all.js';
 import { useAuth } from '../../context/authContext';
 import { useUpdateError } from '../../hooks';
 import { update } from '../../services/user.service';
+import { ProfileSteps } from '../../components/ProfileSteps/ProfileSteps';
 
 export const FormProfile7 = () => {
   const { user, setUser } = useAuth();
@@ -59,6 +60,8 @@ export const FormProfile7 = () => {
   }, [updatedUser, navigate]);
 
   return (
+    <>
+    <ProfileSteps/>
     <form className="form-update-profile" onSubmit={handleSubmit(formSubmit)}>
       <fieldset>
         <legend>Selecciona un objetivo</legend>
@@ -97,5 +100,6 @@ export const FormProfile7 = () => {
         Actualizar
       </button>
     </form>
+    </>
   );
 };

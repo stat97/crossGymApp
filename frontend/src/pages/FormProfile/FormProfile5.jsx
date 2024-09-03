@@ -8,6 +8,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.all.js';
 import { useAuth } from '../../context/authContext';
 import { useUpdateError } from '../../hooks';
 import { update } from '../../services/user.service';
+import { ProfileSteps } from '../../components/ProfileSteps/ProfileSteps';
 
 export const FormProfile5 = () => {
   const { user, setUser, setDeleteUser } = useAuth();
@@ -66,6 +67,7 @@ export const FormProfile5 = () => {
 
   return (
     <>
+    <ProfileSteps/>
       <form className="form-update-profile" onSubmit={handleSubmit(formSubmit)}>
         <h2 className="form-title">Selecciona tu género</h2>
 

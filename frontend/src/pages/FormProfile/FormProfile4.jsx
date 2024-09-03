@@ -7,6 +7,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.all.js';
 import { useAuth } from '../../context/authContext';
 import { useUpdateError } from '../../hooks';
 import { update } from '../../services/user.service';
+import { ProfileSteps } from '../../components/ProfileSteps/ProfileSteps';
 
 export const FormProfile4 = () => {
   const { user, setUser } = useAuth();
@@ -66,8 +67,10 @@ export const FormProfile4 = () => {
   }, [updatedUser, navigate]);
 
   return (
+    <>
+    <ProfileSteps/>
     <form className="form-update-profile" onSubmit={handleSubmit(formSubmit)}>
-      <label htmlFor="height">Altura</label>
+      <label htmlFor="height">Altura (m)</label>
       <input
         className="input_user"
         type="text"
@@ -76,7 +79,7 @@ export const FormProfile4 = () => {
         autoComplete="off"
         defaultValue={defaultData?.height}
       />
-      <label htmlFor="weight">Peso</label>
+      <label htmlFor="weight">Peso (kg)</label>
       <input
         className="input_user"
         type="text"
@@ -89,5 +92,6 @@ export const FormProfile4 = () => {
         Siguiente
       </button>
     </form>
+    </>
   );
 };
